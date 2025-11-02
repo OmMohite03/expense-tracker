@@ -21,7 +21,6 @@ const TransactionList = () => {
   };
 
   const handleFilter = () => {
-    // Only send non-empty filters
     const activeFilters = Object.fromEntries(
       Object.entries(filters).filter(([_, v]) => v !== "")
     );
@@ -33,8 +32,21 @@ const TransactionList = () => {
     dispatch(fetchTransactions());
   };
 
-  if (status === "loading") return <div>Loading transactions...</div>;
-  if (status === "failed") return <div className="text-red-600">Error: {error}</div>;
+  // 🌀 Enhanced loading indicator
+  if (status === "loading")
+    return (
+      <div className="flex flex-col items-center justify-center py-10 text-gray-600">
+        <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-3"></div>
+        <p>Loading transactions...</p>
+      </div>
+    );
+
+  if (status === "failed")
+    return (
+      <div className="text-center text-red-600 py-6">
+        Error loading transactions: {error}
+      </div>
+    );
 
   return (
     <div className="space-y-3">
