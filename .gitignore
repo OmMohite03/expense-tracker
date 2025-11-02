@@ -28,3 +28,6 @@ Thumbs.db
 # Coverage / cache
 coverage/
 .cache/
+
+npm
+frontend/npm
